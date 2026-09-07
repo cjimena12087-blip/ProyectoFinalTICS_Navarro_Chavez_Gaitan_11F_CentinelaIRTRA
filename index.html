@@ -1,1 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CentinelaIRTRA — Sistema de Seguridad Autónomo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue-deep:#0B4F8A;
+    --blue-mid:#1774B8;
+    --teal:#149C9C;
+    --navy:#10263B;
+    --bg:#FFFFFF;
+    --bg-soft:#F4F8FB;
+    --line:#DCE6EE;
+    --amber:#E8A23D;
+    --green:#2E9E5B;
+    --red:#D6483F;
+    --text-muted:#4A5F71;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    color:var(--navy);
+    background:var(--bg);
+    line-height:1.55;
+  }
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk',sans-serif;
+    color:var(--navy);
+    margin:0;
+  }
+  a{color:var(--blue-mid);}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 32px;}
+  @media (max-width:640px){.wrap{padding:0 20px;}}
 
+  /* NAV */
+  header{
+    position:sticky;top:0;z-index:20;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 32px;max-width:1080px;margin:0 auto;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem;font-family:'Space Grotesk',sans-serif;}
+  .brand-mark{width:14px;height:14px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(46,158,91,.15);}
+  nav ul{list-style:none;display:flex;gap:28px;margin:0;padding:0;}
+  nav a{color:var(--navy);text-decoration:none;font-size:.94rem;font-weight:500;}
+  nav a:hover{color:var(--blue-mid);}
+  @media (max-width:720px){nav ul{display:none;}}
+
+  /* HERO */
+  .hero{padding:88px 0 64px;}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;}
+  @media (max-width:840px){.hero-grid{grid-template-columns:1fr;}}
+  .eyebrow{
+    color:var(--blue-mid);font-weight:600;font-size:.9rem;
+  }
+  .hero h1{font-size:clamp(2.3rem,4.2vw,3.4rem);line-height:1.08;margin:14px 0 20px;letter-spacing:-.01em;}
+  .hero p.lede{color:var(--text-muted);font-size:1.12rem;max-width:46ch;}
+  .cta-row{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:13px 22px;border-radius:8px;font-weight:600;font-size:.95rem;
+    text-decoration:none;border:1px solid transparent;transition:transform .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--blue-deep);color:#fff;}
+  .btn-ghost{background:#fff;color:var(--navy);border-color:var(--line);}
+
+  /* Signal graphic */
+  .signal{
+    background:var(--navy);
+    border-radius:16px;
+    padding:36px;
+    display:flex;flex-direction:column;align-items:center;gap:22px;
+    box-shadow:0 20px 45px -20px rgba(16,38,59,.45);
+  }
+  .signal-title{color:#AFC6D8;font-size:.82rem;letter-spacing:.02em;text-align:center;}
+  .lamp-col{display:flex;flex-direction:column;gap:16px;}
+  .lamp{width:64px;height:64px;border-radius:50%;opacity:.28;}
+  .lamp.on-red{background:var(--red);opacity:1;box-shadow:0 0 26px 4px rgba(214,72,63,.55);}
+  .lamp.on-amber{background:var(--amber);opacity:1;box-shadow:0 0 26px 4px rgba(232,162,61,.5);}
+  .lamp.on-green{background:var(--green);opacity:1;box-shadow:0 0 26px 4px rgba(46,158,91,.5);}
+  .signal-caption{color:#7E97AB;font-size:.8rem;text-align:center;max-width:220px;}
+
+  section{padding:64px 0;}
+  .section-head{max-width:56ch;margin-bottom:36px;}
+  .section-label{color:var(--teal);font-weight:600;font-size:.88rem;margin-bottom:8px;}
+  .section-head h2{font-size:1.85rem;margin-bottom:10px;}
+  .section-head p{color:var(--text-muted);}
+
+  .soft{background:var(--bg-soft);}
+
+  /* Problem / solution */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+  @media (max-width:760px){.split{grid-template-columns:1fr;}}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:28px;}
+  .panel h3{font-size:1.1rem;margin-bottom:10px;}
+  .panel p{color:var(--text-muted);font-size:.97rem;}
+  .tag{
+    display:inline-block;font-size:.78rem;font-weight:600;
+    padding:4px 10px;border-radius:6px;margin-bottom:14px;
+  }
+  .tag-problem{background:#FDECEA;color:var(--red);}
+  .tag-solution{background:#E7F6F1;color:var(--green);}
+
+  /* How it works */
+  .sensor-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  @media (max-width:820px){.sensor-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:560px){.sensor-grid{grid-template-columns:1fr;}}
+  .sensor-card{
+    border:1px solid var(--line);border-radius:12px;padding:24px;background:#fff;
+  }
+  .sensor-num{
+    font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--blue-mid);
+    font-size:.85rem;margin-bottom:10px;
+  }
+  .sensor-card h3{font-size:1.02rem;margin-bottom:8px;}
+  .sensor-card p{color:var(--text-muted);font-size:.92rem;margin:0;}
+
+  /* ODS */
+  .ods-row{display:flex;gap:18px;flex-wrap:wrap;}
+  .ods-chip{
+    display:flex;align-items:center;gap:12px;
+    border:1px solid var(--line);border-radius:10px;padding:14px 18px;background:#fff;
+    min-width:230px;
+  }
+  .ods-num{
+    width:38px;height:38px;border-radius:8px;flex:none;
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-weight:700;font-family:'Space Grotesk',sans-serif;
+  }
+  .ods-3 .ods-num{background:#4C9F38;}
+  .ods-9 .ods-num{background:#FD6925;}
+  .ods-chip strong{display:block;font-size:.92rem;}
+  .ods-chip span{color:var(--text-muted);font-size:.82rem;}
+
+  /* Table */
+  table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;border:1px solid var(--line);}
+  th,td{text-align:left;padding:14px 18px;font-size:.92rem;border-bottom:1px solid var(--line);}
+  th{background:var(--bg-soft);color:var(--navy);font-weight:600;}
+  tr:last-child td{border-bottom:none;}
+  .status-ok{color:var(--green);font-weight:600;}
+
+  /* media / circuit */
+  .media-shot{
+    border:1px dashed var(--line);border-radius:12px;
+    background:var(--bg-soft);
+    height:320px;display:flex;align-items:center;justify-content:center;
+    color:var(--text-muted);font-size:.92rem;text-align:center;padding:20px;
+  }
+
+  /* team */
+  .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  @media (max-width:680px){.team-grid{grid-template-columns:1fr;}}
+  .member{text-align:center;}
+  .avatar-slot{
+    width:120px;height:120px;border-radius:50%;margin:0 auto 14px;
+    background:var(--bg-soft);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--text-muted);font-size:.78rem;
+  }
+  .member h3{font-size:1rem;}
+  .member p{color:var(--text-muted);font-size:.86rem;margin:2px 0 0;}
+
+  /* links */
+  .link-row{display:flex;gap:18px;flex-wrap:wrap;}
+  .link-card{
+    flex:1;min-width:220px;
+    border:1px solid var(--line);border-radius:12px;padding:24px;background:#fff;
+    text-decoration:none;color:var(--navy);
+    display:flex;flex-direction:column;gap:8px;
+  }
+  .link-card:hover{border-color:var(--blue-mid);}
+  .link-card strong{font-size:1.02rem;}
+  .link-card span{color:var(--text-muted);font-size:.88rem;}
+
+  footer{
+    border-top:1px solid var(--line);padding:32px 0;color:var(--text-muted);font-size:.85rem;
+  }
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="brand"><span class="brand-mark"></span> CentinelaIRTRA</div>
+    <ul>
+      <li><a href="#problema">Problemática</a></li>
+      <li><a href="#solucion">Solución</a></li>
+      <li><a href="#circuito">Circuito</a></li>
+      <li><a href="#equipo">Equipo</a></li>
+      <li><a href="#recursos">Recursos</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Consultoría de Automatización — IRTRA Petapa</div>
+        <h1>Un semáforo de seguridad que nunca se distrae.</h1>
+        <p class="lede">CentinelaIRTRA vigila la zona de abordaje y mantenimiento de una atracción mecánica en tiempo real, y avisa antes de que un descuido se convierta en un accidente.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#solucion">Ver cómo funciona</a>
+          <a class="btn btn-ghost" href="#recursos">Ir a recursos y podcast</a>
+        </div>
+      </div>
+      <div class="signal">
+        <div class="signal-title">ESTADO DEL SISTEMA</div>
+        <div class="lamp-col">
+          <div class="lamp on-red"></div>
+          <div class="lamp"></div>
+          <div class="lamp"></div>
+        </div>
+        <div class="signal-caption">Rojo activo: invasión de distancia segura detectada por el sensor ultrasónico.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="problema" class="soft">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-label">Diagnóstico</div>
+        <h2>La vigilancia humana tiene límites</h2>
+        <p>Así identificamos la problemática durante el levantamiento técnico en IRTRA Petapa.</p>
+      </div>
+      <div class="split">
+        <div class="panel">
+          <span class="tag tag-problem">Problemática</span>
+          <h3>Zonas de riesgo sin monitoreo constante</h3>
+          <p>El personal debe vigilar simultáneamente que ningún visitante se acerque a las partes móviles de una atracción en operación, y que nadie ingrese sin autorización a las zonas de mantenimiento. Un descuido momentáneo puede derivar en un accidente grave.</p>
+        </div>
+        <div class="panel">
+          <span class="tag tag-solution">Solución propuesta</span>
+          <h3>Automatización con Arduino</h3>
+          <p>Un sistema autónomo mide distancias y detecta movimiento las 24 horas, mostrando el nivel de riesgo con una señal luminosa y sonora clara, sin depender de que un operador esté mirando en ese instante exacto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="solucion">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-label">Cómo funciona</div>
+        <h2>Tres sensores, una sola decisión</h2>
+        <p>El circuito combina lectura de distancia, movimiento y control manual del operador para decidir el estado de seguridad.</p>
+      </div>
+      <div class="sensor-grid">
+        <div class="sensor-card">
+          <div class="sensor-num">Sensor 1</div>
+          <h3>Ultrasónico HC-SR04</h3>
+          <p>Mide la distancia frente al mecanismo. Si alguien invade el rango seguro, el sistema pasa a alerta.</p>
+        </div>
+        <div class="sensor-card">
+          <div class="sensor-num">Sensor 2</div>
+          <h3>PIR de movimiento</h3>
+          <p>Detecta presencia en la zona de mantenimiento cuando el sistema está armado fuera de horario de operación.</p>
+        </div>
+        <div class="sensor-card">
+          <div class="sensor-num">Control</div>
+          <h3>Push button + LED RGB</h3>
+          <p>El operador arma o desarma el sistema. El LED RGB y el buzzer comunican el estado: seguro, precaución o alarma.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="soft">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-label">Alineación</div>
+        <h2>Objetivos de Desarrollo Sostenible</h2>
+      </div>
+      <div class="ods-row">
+        <div class="ods-chip ods-3">
+          <div class="ods-num">3</div>
+          <div><strong>Salud y Bienestar</strong><span>Previene accidentes en zonas de riesgo</span></div>
+        </div>
+        <div class="ods-chip ods-9">
+          <div class="ods-num">9</div>
+          <div><strong>Industria e Innovación</strong><span>Automatización aplicada a infraestructura recreativa</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="circuito">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-label">Prototipo</div>
+        <h2>Materiales y estado del sistema</h2>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Componente</th><th>Función</th><th>Estado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Arduino Uno R3</td><td>Controlador principal</td><td class="status-ok">Funciona</td></tr>
+          <tr><td>Sensor ultrasónico HC-SR04</td><td>Distancia de seguridad</td><td class="status-ok">Funciona</td></tr>
+          <tr><td>Sensor PIR</td><td>Detección de movimiento</td><td class="status-ok">Funciona</td></tr>
+          <tr><td>LED RGB</td><td>Señal visual de estado</td><td class="status-ok">Funciona</td></tr>
+          <tr><td>Buzzer</td><td>Alarma sonora</td><td class="status-ok">Funciona</td></tr>
+          <tr><td>Push button</td><td>Armar / desarmar sistema</td><td class="status-ok">Funciona</td></tr>
+        </tbody>
+      </table>
+
+      <div style="height:28px"></div>
+
+      <div class="media-shot">
+        Reemplazar este bloque con la captura legible del circuito armado en Tinkercad<br>
+        (sugerencia: &lt;img src="circuito/captura-tinkercad.png" alt="Circuito CentinelaIRTRA en Tinkercad"&gt;)
+      </div>
+    </div>
+  </section>
+
+  <section id="equipo" class="soft">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-label">Consultores a cargo</div>
+        <h2>Equipo del proyecto</h2>
+      </div>
+      <div class="team-grid">
+        <div class="member">
+          <div class="avatar-slot">Avatar IA</div>
+          <h3>Natalia Navarro</h3>
+          <p>11F</p>
+        </div>
+        <div class="member">
+          <div class="avatar-slot">Avatar IA</div>
+          <h3>Sofía Chávez</h3>
+          <p>11F</p>
+        </div>
+        <div class="member">
+          <div class="avatar-slot">Avatar IA</div>
+          <h3>Mauricio Gaitán</h3>
+          <p>11F</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="recursos">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-label">Recursos</div>
+        <h2>Documentación completa del proyecto</h2>
+      </div>
+      <div class="link-row">
+        <a class="link-card" href="https://github.com/cjimena12087-blip/ProyectoFinalTICS_Navarro_Chavez_Gaitan_11F_CentinelaIRTRA" target="_blank" rel="noopener">
+          <strong>Repositorio en GitHub</strong>
+          <span>Documento de investigación, infografía y archivos del proyecto</span>
+        </a>
+        <a class="link-card" href="#" target="_blank" rel="noopener">
+          <strong>Podcast del proyecto</strong>
+          <span>Reemplazar este enlace con el link del video en YouTube</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>CentinelaIRTRA — Proyecto Final, Tecnología Aplicada, 11F</span>
+    <span>Navarro · Chávez · Gaitán</span>
+  </div>
+</footer>
+
+</body>
+</html>

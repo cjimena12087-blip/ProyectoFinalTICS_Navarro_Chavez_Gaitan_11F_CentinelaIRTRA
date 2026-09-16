@@ -372,10 +372,36 @@
     <embed src="Informe_CentinelaIRTRA (1).docx" type="application/pdf" width="100%" height="600px" />
 </body>
 </html>
-          <!-- Remplaza 'documento.pdf' por la ruta/nombre de tu archivo -->
-    <embed src="Informe Final tics.pdf" type="application/pdf" width="100%" height="600px" />
+        <!-- Botón para descargar el documento de Word -->
+<a href="Informe_CentinelaIRTRA (1).docx" download="MiDocumento.docx" class="btn-descargar">
+  📥 Descargar archivo Word
+</a>
 
+<!-- Estilos para que parezca un botón elegante -->
+<style>
+  .btn-descargar {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #2b579a; /* Azul de Microsoft Word */
+    color: white;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+  }
 
+  .btn-descargar:hover {
+    background-color: #1e3c6b;
+    transform: translateY(-2px);
+  }
+
+  .btn-descargar:active {
+    transform: translateY(0);
+  }
+</style>
         <a class="link-card" href="https://youtu.be/koPUSKeRge0" target="_blank" rel="noopener">
           <strong>Podcast del proyecto</strong>
           <span>¡Haz click aqui!</span>

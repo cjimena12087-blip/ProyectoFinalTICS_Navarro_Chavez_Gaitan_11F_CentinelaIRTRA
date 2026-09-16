@@ -150,14 +150,6 @@
   tr:last-child td{border-bottom:none;}
   .status-ok{color:var(--green);font-weight:600;}
 
-  /* media / circuit */
-  .media-shot{
-    border:1px dashed var(--line);border-radius:12px;
-    background:var(--bg-soft);
-    height:320px;display:flex;align-items:center;justify-content:center;
-    color:var(--text-muted);font-size:.92rem;text-align:center;padding:20px;
-  }
-
   /* team */
   .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
   @media (max-width:680px){.team-grid{grid-template-columns:1fr;}}
@@ -167,14 +159,14 @@
     background:var(--bg-soft);border:1px solid var(--line);
     display:flex;align-items:center;justify-content:center;
     color:var(--text-muted);font-size:.78rem;
+    object-fit:cover;
   }
   .member h3{font-size:1rem;}
   .member p{color:var(--text-muted);font-size:.86rem;margin:2px 0 0;}
 
-  /* links */
-  .link-row{display:flex;gap:18px;flex-wrap:wrap;}
+  /* links y recursos */
+  .link-row{display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:18px;margin-bottom:32px;}
   .link-card{
-    flex:1;min-width:220px;
     border:1px solid var(--line);border-radius:12px;padding:24px;background:#fff;
     text-decoration:none;color:var(--navy);
     display:flex;flex-direction:column;gap:8px;
@@ -182,6 +174,39 @@
   .link-card:hover{border-color:var(--blue-mid);}
   .link-card strong{font-size:1.02rem;}
   .link-card span{color:var(--text-muted);font-size:.88rem;}
+
+  /* Visores PDF */
+  .pdf-container {
+    margin-top: 32px;
+  }
+  .pdf-viewer {
+    width: 100%;
+    height: 600px;
+    margin-bottom: 40px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+
+  /* Botón Descargar Word */
+  .btn-descargar {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #2b579a;
+    color: white;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    margin-bottom: 16px;
+  }
+  .btn-descargar:hover {
+    background-color: #1e3c6b;
+    transform: translateY(-2px);
+  }
 
   footer{
     border-top:1px solid var(--line);padding:32px 0;color:var(--text-muted);font-size:.85rem;
@@ -318,13 +343,13 @@
 
       <div style="height:28px"></div>
 
-<video controls style="width:100%; max-width:100%; border-radius:12px; display:block;">
-  <source src="centinela irtra.mp4" type="video/mp4">
-</video>
+      <video controls style="width:100%; max-width:100%; border-radius:12px; display:block;">
+        <source src="centinela irtra.mp4" type="video/mp4">
+      </video>
     </div>
   </section>
 
-<section id="equipo" class="soft">
+  <section id="equipo" class="soft">
     <div class="wrap">
       <div class="section-head">
         <div class="section-label">Consultores a cargo</div>
@@ -337,79 +362,64 @@
           <p>11F</p>
         </div>
         <div class="member">
-          <img class="avatar-slot" src="Chavez.jpg" alt="Avatar de Chavez">
+          <img class="avatar-slot" src="Chavez.jpg" alt="Avatar de Sofía Chávez">
           <h3>Sofía Chávez</h3>
           <p>11F</p>
         </div>
         <div class="member">
-          <img class="avatar-slot" src="Mau.jpg" alt="Avatar de Mau">
+          <img class="avatar-slot" src="Mau.jpg" alt="Avatar de Mauricio Gaitán">
           <h3>Mauricio Gaitán</h3>
           <p>11F</p>
         </div>
       </div>
     </div>
   </section>
+
   <section id="recursos">
     <div class="wrap">
       <div class="section-head">
         <div class="section-label">Recursos</div>
         <h2>Documentación completa del proyecto</h2>
       </div>
+      
+      <!-- Enlaces de GitHub y Podcast -->
       <div class="link-row">
         <a class="link-card" href="https://github.com/cjimena12087-blip/ProyectoFinalTICS_Navarro_Chavez_Gaitan_11F_CentinelaIRTRA" target="_blank" rel="noopener">
           <strong>Repositorio en GitHub</strong>
           <span>Documento de investigación, infografía y archivos del proyecto</span>
-        </a
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-
-    <!-- Remplaza 'documento.pdf' por la ruta/nombre de tu archivo -->
-    <embed src="Infografia TICS nex.pdf" type="application/pdf" width="100%" height="600px" />
-    <!-- Remplaza 'documento.pdf' por la ruta/nombre de tu archivo -->
-    <embed src="ticspdf.pdf" type="application/pdf" width="100%" height="600px" />
-</body>
-</html>
-        <!-- Botón para descargar el documento de Word -->
-<a href="Informe_CentinelaIRTRA (1).docx" download="MiDocumento.docx" class="btn-descargar">
-  📥 Descargar archivo Word
-</a>
-
-<!-- Estilos para que parezca un botón elegante -->
-<style>
-  .btn-descargar {
-    display: inline-block;
-    padding: 12px 24px;
-    background-color: #2b579a; /* Azul de Microsoft Word */
-    color: white;
-    text-decoration: none;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 6px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.2s ease, transform 0.1s ease;
-  }
-
-  .btn-descargar:hover {
-    background-color: #1e3c6b;
-    transform: translateY(-2px);
-  }
-
-  .btn-descargar:active {
-    transform: translateY(0);
-  }
-</style>
+        </a>
         <a class="link-card" href="https://youtu.be/koPUSKeRge0" target="_blank" rel="noopener">
           <strong>Podcast del proyecto</strong>
-          <span>¡Haz click aqui!</span
+          <span>¡Haz clic aquí para escuchar!</span>
+        </a>
+      </div>
+
+      <!-- Botón para descargar archivo Word -->
+      <div style="margin-bottom: 24px;">
+        <a href="Informe_CentinelaIRTRA (1).docx" download class="btn-descargar">
+          📥 Descargar informe en Word (.docx)
+        </a>
+      </div>
+
+      <!-- Visores de PDF -->
+      <div class="pdf-container">
+        <h3>Infografía TICS</h3>
+        <embed src="Infografia TICS nex.pdf" type="application/pdf" class="pdf-viewer" />
+
+        <h3>Documento TICS</h3>
+        <embed src="ticspdf.pdf" type="application/pdf" class="pdf-viewer" />
+      </div>
+
+    </div>
+  </section>
+</main>
+
 <footer>
   <div class="wrap">
     <span>CentinelaIRTRA — Proyecto Final, Tecnología Aplicada, 11F</span>
     <span>Navarro · Chávez · Gaitán</span>
   </div>
 </footer>
+
 </body>
 </html>
